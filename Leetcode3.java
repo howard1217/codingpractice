@@ -424,7 +424,6 @@ public class Leetcode3 extends Leetcode {
 
     public boolean existHelper(char[][] board, String word
         , boolean[][] used, int i, int j, int index) {
-        System.out.printf("index: %s, i: %s, j: %s\n", index, i, j);
         if (index == word.length()) return true;
         if (i < 0 || i >= board.length || j < 0 || j >= board[0].length)
             return false;
@@ -566,5 +565,35 @@ public class Leetcode3 extends Leetcode {
         }
     }
 
-    
+    /** Given numRows, generate the first numRows of Pascal's triangle.
+     *  For example, given numRows = 5,
+     *  Return
+
+        [
+             [1],
+            [1,1],
+           [1,2,1],
+          [1,3,3,1],
+         [1,4,6,4,1]
+        ]
+     *  https://oj.leetcode.com/problems/pascals-triangle/ */
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        if (numRows <= 0) return result;
+        for (int i = 0; i < numRows; i += 1) {
+            List<Integer> curr = new ArrayList<Integer>();
+            for (int j = 0; j <= i; j += 1) {
+                if (i == 0) {
+                    curr.add(1);
+                    continue;
+                }
+                int num = 0;
+                if (j > 0) num += result.get(result.size() - 1).get(j - 1);
+                if (j < i) num += result.get(result.size() - 1).get(j);
+                curr.add(num);
+            }
+            result.add(curr);
+        }
+        return result;
+    }
 }
