@@ -63,7 +63,8 @@ public class Test extends Leetcode {
         // report("Permutations", testP());
         // report("Rotate Image", testRI());
         // report("Pow(x, n)", testPow());
-        report("Word Search", testWS());
+        // report("Word Search", testWS());
+        // report("Spiral Matrix II", testSMII());
         System.out.println("========================================");
         System.out.printf("Run %s tests. %s passes. %s fails.\n", numPasses
             + numFails, numPasses, numFails);
@@ -889,6 +890,23 @@ public class Test extends Leetcode {
         char[][] board2 = {{'b', 'b'}, {'a', 'b'}, {'b', 'a'}};
         String word2 = "a";
         if (!l3.exist(board1, word1)) return true;
+        return false;
+    }
+
+    /** Return true iff Spiral Matrix II passes its tests. */
+    private static boolean testSMII() {
+        int[][] result1 = l3.generateMatrix(3);
+        for (int i = 0; i < 3; i += 1) {
+            for (int j = 0; j < 3; j += 1) System.out.printf("%s ",result1[i][j]);
+            System.out.println();
+        }
+
+        int[][] result2 = l3.generateMatrix(10);
+        for (int i = 0; i < 10; i += 1) {
+            for (int j = 0; j < 10; j += 1) System.out.printf("%s ",result2[i][j]);
+            System.out.println();
+        }
+        if (true) return true;
         return false;
     }
 
