@@ -596,4 +596,71 @@ public class Leetcode3 extends Leetcode {
         }
         return result;
     }
+
+    /** Given an integer n, generate a square matrix filled with elements
+     *  from 1 to n2 in spiral order.
+        For example,
+        Given n = 3,
+
+        You should return the following matrix:
+        [
+         [ 1, 2, 3 ],
+         [ 8, 9, 4 ],
+         [ 7, 6, 5 ]
+        ]
+     *  https://oj.leetcode.com/problems/spiral-matrix-ii/ */
+    public int[][] generateMatrix(int n) {
+        int[][] result = new int[n][n];
+        int i = 0, j = 0, count = 1, limit = n * n;
+        String state = "right";
+        while (count <= limit) {
+            switch (state) {
+                case "right":
+                    while (j < n && count <= limit && result[i][j] == 0) {
+                        result[i][j] = count;
+                        j += 1;
+                        count += 1;
+                        if (count > limit) break;
+                    }
+                    i += 1;
+                    j -= 1;
+                    state = "down";
+                    break;
+                case "down":
+                    while (i < n && count <= limit && result[i][j] == 0) {
+                        result[i][j] = count;
+                        i += 1;
+                        count += 1;
+                        if (count > limit) break;
+                    }
+                    j -= 1;
+                    i -= 1;
+                    state = "left";
+                    break;
+                case "left":
+                    while (j >= 0 && count <= limit && result[i][j] == 0) {
+                        result[i][j] = count;
+                        j -= 1;
+                        count += 1;
+                        if (count > limit) break;
+                    }
+                    i -= 1;
+                    j += 1;
+                    state = "up";
+                    break;
+                case "up":
+                    while (i >= 0 && count <= limit && result[i][j] == 0) {
+                        result[i][j] = count;
+                        i -= 1;
+                        count += 1;
+                        if (count > limit) break;
+                    }
+                    j += 1;
+                    i += 1;
+                    state = "right";
+                    break;
+            }
+        }
+        return result;
+    }
 }
