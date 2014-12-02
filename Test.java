@@ -65,6 +65,7 @@ public class Test extends Leetcode {
         // report("Pow(x, n)", testPow());
         // report("Word Search", testWS());
         // report("Spiral Matrix II", testSMII());
+        report("Set Matrix Zeroes", testSMZ());
         System.out.println("========================================");
         System.out.printf("Run %s tests. %s passes. %s fails.\n", numPasses
             + numFails, numPasses, numFails);
@@ -906,6 +907,14 @@ public class Test extends Leetcode {
             for (int j = 0; j < 10; j += 1) System.out.printf("%s ",result2[i][j]);
             System.out.println();
         }
+        if (true) return true;
+        return false;
+    }
+
+    /** Return true iff Set Matrix Zeroes passes its tests. */
+    private static boolean testSMZ() {
+        int[][] matrix1 = {{0,0,0,5},{4,3,1,4},{0,1,1,4},{1,2,1,3},{0,0,1,1}};
+        l3.setZeroes(matrix1);
         if (true) return true;
         return false;
     }

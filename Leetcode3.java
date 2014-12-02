@@ -691,4 +691,37 @@ public class Leetcode3 extends Leetcode {
         }
         return (matrix[a / n][a % n] == target) || (matrix[b / n][b % n] == target);
     }
+
+    /** Given a m x n matrix, if an element is 0, set its entire row and column to 0.
+     *  Do it in place. */
+    public void setZeroes(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) return;
+        int firstRowWithZero = -1, firstColumnWithZero = -1;
+        for (int i = 0; i < matrix.length; i += 1) {
+            for (int j = 0; j < matrix[0].length; j += 1) {
+                if (matrix[i][j] == 0) {
+                    if (firstRowWithZero < 0) {
+                        firstRowWithZero = i;
+                        firstColumnWithZero = j;
+                    } else {
+                        matrix[i][firstColumnWithZero] = 0;
+                        matrix[firstRowWithZero][j] = 0;
+                    }
+                }
+            }
+        }
+        for (int j = 0; j < matrix[0].length && firstRowWithZero > -1; j += 1) {
+            if (matrix[firstRowWithZero][j] == 0 && j != firstColumnWithZero) {
+                for (int i = 0; i < matrix.length; i += 1) matrix[i][j] = 0;
+            }
+        }
+        for (int i = 0; i < matrix.length && firstColumnWithZero > -1; i += 1) {
+            if (matrix[i][firstColumnWithZero] == 0) {
+                for (int j = 0; j < matrix[0].length; j += 1) matrix[i][j] = 0;
+            }
+        }
+        if (firstColumnWithZero > -1) {
+            for (int i = 0; i < matrix.length; i += 1) matrix[i][firstColumnWithZero] = 0;
+        }
+    }
 }
