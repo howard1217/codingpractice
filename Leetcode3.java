@@ -724,4 +724,31 @@ public class Leetcode3 extends Leetcode {
             for (int i = 0; i < matrix.length; i += 1) matrix[i][firstColumnWithZero] = 0;
         }
     }
+
+    /** Given a m x n grid filled with non-negative numbers, find a path 
+     *  from top left to bottom right which minimizes the sum of all numbers 
+     *  along its path.
+     *  https://oj.leetcode.com/problems/minimum-path-sum/ */
+    public int minPathSum(int[][] grid) {
+        if (grid == null || grid.length == 0) return 0;
+        int m = grid.length, n = grid[0].length;
+        int[][] mem = new int[m][n];
+        for (int i = 0; i < m; i += 1) Arrays.fill(mem[i], -1);
+        return minPathSumHelper(grid, mem, m - 1, n - 1);
+    }
+
+    public int minPathSumHelper(int[][] grid, int[][] mem, int i, int j) {
+        if (mem[i][j] > -1) return mem[i][j];
+        int top = i > 0 ? minPathSumHelper(grid, mem, i - 1, j) : -1;
+        int left = j > 0 ? minPathSumHelper(grid, mem, i, j - 1) : -1;
+        int toAdd;
+        if (top < 0 && left < 0) toAdd = 0;
+        else if (top < 0) toAdd = left;
+        else if (left < 0) toAdd = top;
+        else toAdd = Math.min(top, left);
+        mem[i][j] = toAdd + grid[i][j];
+        return mem[i][j];
+    }
+
+    
 }

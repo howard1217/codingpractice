@@ -65,7 +65,8 @@ public class Test extends Leetcode {
         // report("Pow(x, n)", testPow());
         // report("Word Search", testWS());
         // report("Spiral Matrix II", testSMII());
-        report("Set Matrix Zeroes", testSMZ());
+        // report("Set Matrix Zeroes", testSMZ());
+        report("Minimum Path Sum", testMPS());
         System.out.println("========================================");
         System.out.printf("Run %s tests. %s passes. %s fails.\n", numPasses
             + numFails, numPasses, numFails);
@@ -916,6 +917,13 @@ public class Test extends Leetcode {
         int[][] matrix1 = {{0,0,0,5},{4,3,1,4},{0,1,1,4},{1,2,1,3},{0,0,1,1}};
         l3.setZeroes(matrix1);
         if (true) return true;
+        return false;
+    }
+
+    /** Return true iff Minimum Path Sum passes its tests. */
+    private static boolean testMPS() {
+        int[][] grid1 = {{1, 2}, {1, 1}};
+        if (l3.minPathSum(grid1) == 3) return true;
         return false;
     }
 
