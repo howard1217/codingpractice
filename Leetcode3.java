@@ -750,5 +750,78 @@ public class Leetcode3 extends Leetcode {
         return mem[i][j];
     }
 
-    
+    /** Given a collection of intervals, merge all overlapping intervals.
+     *  For example,
+     *  Given [1,3],[2,6],[8,10],[15,18],
+     *  return [1,6],[8,10],[15,18].
+     *  https://oj.leetcode.com/problems/merge-intervals/ */
+    public List<Interval> merge(List<Interval> intervals) {
+        List<Interval> result = new LinkedList<Interval>();
+        if (intervals == null || intervals.size() == 0) return result;
+        PriorityQueue<Integer> lBound = new PriorityQueue<Integer>();
+        PriorityQueue<Integer> uBound = new PriorityQueue<Integer>();
+        int level = 0, start = 0;
+        for (Interval i : intervals) {
+            lBound.add(i.start);
+            uBound.add(i.end);
+        }
+        while (lBound.size() > 0) {
+            if (level == 0) {
+                start = lBound.poll();
+                level += 1;
+            } else {
+                int low = lBound.peek();
+                int high = uBound.peek();
+                if (high < low) {
+                    uBound.poll();
+                    level -= 1;
+                    if (level == 0) result.add(new Interval(start, high));
+                } else if (high > low) {
+                    lBound.poll();
+                    level += 1;
+                } else {
+                    lBound.poll();
+                    uBound.poll();
+                }
+            }
+        }
+        while (uBound.size() > 1) uBound.poll();
+        result.add(new Interval(start, uBound.poll()));
+        return result;
+    }
+
+    /** Find the contiguous subarray within an array (containing at 
+     *  least one number) which has the largest sum.
+     *  For example, given the array [−2,1,−3,4,−1,2,1,−5,4],
+     *  the contiguous subarray [4,−1,2,1] has the largest sum = 6.
+     *  https://oj.leetcode.com/problems/maximum-subarray/ */
+    public int maxSubArray(int[] A) {
+        if (A == null || A.length == 0) return 0;
+        int sum = A[0];
+        int max = A[0];
+        for (int i = 1; i < A.length; i++) {
+            sum = Math.max(A[i], sum + A[i]);
+            max = Math.max(max, sum);
+        }
+        return max;
+    }
+
+    /** Find the contiguous subarray within an array (containing at least 
+     *  one number) which has the largest product.
+     *  For example, given the array [2,3,-2,4],
+     *  the contiguous subarray [2,3] has the largest product = 6.
+     *  https://oj.leetcode.com/problems/maximum-product-subarray/ */
+    public int maxProduct(int[] A) {
+        if (A == null || A.length == 0) return 0;
+        int max = A[0];
+        int min = A[0];
+        int result = A[0];
+        for (int i = 1; i < A.length; i++) {
+            int max_copy = max;
+            max = Math.max(Math.max(max_copy * A[i], A[i]), min * A[i]);
+            min = Math.min(Math.min(min * A[i], A[i]), max_copy * A[i]);
+            result = Math.max(result, max);
+        }
+        return result;
+    }
 }
